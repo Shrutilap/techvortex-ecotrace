@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Progress</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: rgb(70, 131, 70);
+            color: black;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1, h2 {
+            color: black;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: 1.5px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f4f4f9;
+            border-left: 5px solid #42a5f5;
+            border-radius: 10px;
+        }
+
+        .summary p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .summary p strong {
+            color: #000;
+        }
+
+        /* Chart.js legend style */
+        .chartjs-render-monitor {
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fortnightly Carbon Emission Progress</h1>
+
+    <div class="container">
+        <!-- Transportation Emissions Chart -->
+        <h2>Transportation Emissions</h2>
+        <div class="chart-container">
+            <canvas id="transportEmissionChart"></canvas>
+        </div>
+
+        <!-- Natural Gas Emissions Chart -->
+        <h2>Natural Gas Emissions</h2>
+        <div class="chart-container">
+            <canvas id="gasEmissionChart"></canvas>
+        </div>
+
+        <!-- Electricity Emissions Chart -->
+        <h2>Electricity Emissions</h2>
+        <div class="chart-container">
+            <canvas id="electricityEmissionChart"></canvas>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary">
+            <p><strong>Total Emission:</strong> 580 kg CO2</p>
+            <p><strong>Average Emission per Fortnight:</strong> 97 kg CO2</p>
+        </div>
+    </div>
+
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Hardcoded Data for the Charts
+
+        // Transportation emission data (kg CO2 per fortnight)
+        const transportEmissionData = [30, 25, 35, 40, 28, 30];
+
+        // Natural gas emission data (kg CO2 per fortnight)
+        const gasEmissionData = [20, 18, 15, 22, 17, 19];
+
+        // Electricity emission data (kg CO2 per fortnight)
+        const electricityEmissionData = [40, 38, 42, 45, 36, 40];
+
+        // Labels for each fortnight
+        const labels = [
+            'Fortnight 1', 
+            'Fortnight 2', 
+            'Fortnight 3', 
+            'Fortnight 4', 
+            'Fortnight 5', 
+            'Fortnight 6'
+        ];
+
+        // Transportation Emissions Chart
+        const ctx1 = document.getElementById('transportEmissionChart').getContext('2d');
+        const transportEmissionChart = new Chart(ctx1, {
+            type: 'line',  // You can change this to 'bar' for a bar chart
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Transportation Emission (kg CO2)',
+                    data: transportEmissionData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Carbon Emission (kg CO2)',
+                            color: '#666'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Fortnight',
+                            color: '#666'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Transportation Carbon Emissions'
+                    }
+                }
+            }
+        });
+
+        // Natural Gas Emissions Chart
+        const ctx2 = document.getElementById('gasEmissionChart').getContext('2d');
+        const gasEmissionChart = new Chart(ctx2, {
+            type: 'line',  // You can change this to 'bar' for a bar chart
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Natural Gas Emission (kg CO2)',
+                    data: gasEmissionData,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Carbon Emission (kg CO2)',
+                            color: '#666'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Fortnight',
+                            color: '#666'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Natural Gas Carbon Emissions'
+                    }
+                }
+            }
+        });
+
+        // Electricity Emissions Chart
+        const ctx3 = document.getElementById('electricityEmissionChart').getContext('2d');
+        const electricityEmissionChart = new Chart(ctx3, {
+            type: 'line',  // You can change this to 'bar' for a bar chart
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Electricity Emission (kg CO2)',
+                    data: electricityEmissionData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Carbon Emission (kg CO2)',
+                            color: '#666'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Fortnight',
+                            color: '#666'
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Electricity Carbon Emissions'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

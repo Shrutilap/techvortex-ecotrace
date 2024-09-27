@@ -1,0 +1,150 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Consumption Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+            margin: 0;
+            background-color: #3b2e2e; /* Darker brown background */
+            background-image:url("assets/image1.jpeg");
+            background-size: cover;
+            background-blend-mode: multiply;
+        }
+        .container {
+            background-color: #a4d3a4; /* Darker green container */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            color: #fff; /* White text for better contrast */
+        }
+        h1 {
+            text-align: center;
+            color: #ffebcd; /* Light color for the header */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: white; /* Lighter color for labels */
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #555; /* Darker border */
+            border-radius: 4px;
+            background-color: #444; /* Darker input background */
+            color: #fff; /* White text inside inputs */
+        }
+        .form-group input[type="button"] {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+        }
+        .form-group input[type="button"]:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #3e3e3e; /* Darker background for the result */
+            color: #fff;
+        }
+        .result h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #ffebcd; /* Lighter color for result text */
+        }
+        canvas {
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+        <h1>Carbon Consumption Calculator</h1>
+        <div class="form-group">
+            <label for="electricity">Electricity Consumption (kWh):</label>
+            <input type="number" id="electricity" step="0.1" placeholder="Enter kWh">
+        </div>
+        <div class="form-group">
+            <label for="miles">Miles Driven:</label>
+            <input type="number" id="miles" step="0.1" placeholder="Enter miles">
+        </div>
+        <div class="form-group">
+            <label for="milesPerGallon">Fuel Efficiency (miles per gallon):</label>
+            <input type="number" id="milesPerGallon" step="0.1" placeholder="Enter miles per gallon">
+        </div>
+        <div class="form-group">
+            <label for="gasHeating">Natural Gas Used for Heating (cubic meters):</label>
+            <input type="number" id="gasHeating" step="0.1" placeholder="Enter cubic meters">
+        </div>
+        <div class="form-group">
+            <input type="button" value="Calculate Emissions" onclick="calculateEmissions()">
+        </div>
+        <div class="result" id="result">
+            <h2 id="resultText">Enter your data and click "Calculate Emissions" to see results.</h2>
+        </div>
+        <h1 class="H1">Carbon Consumption</h1>
+        <canvas id="carbonChart"></canvas>
+        <script src="graph.js"></script>
+        <br><br>
+          </div>
+    <script>
+        // Emission factors
+        const ELECTRICITY_EMISSION_FACTOR = 0.4;  // kg CO2 per kWh
+        const GASOLINE_EMISSION_FACTOR = 2.31;   // kg CO2 per liter
+        const NATURAL_GAS_EMISSION_FACTOR = 2.2; // kg CO2 per cubic meter
+
+        function calculateEmissions() {
+            // Get input values
+            const electricity = parseFloat(document.getElementById('electricity').value);
+            const miles = parseFloat(document.getElementById('miles').value);
+            const milesPerGallon = parseFloat(document.getElementById('milesPerGallon').value);
+            const gasHeating = parseFloat(document.getElementById('gasHeating').value);
+
+            // Validate inputs
+            if (isNaN(electricity) || isNaN(miles) || isNaN(milesPerGallon) || isNaN(gasHeating)) {
+                alert('Please enter valid numbers for all fields.');
+                return;
+            }
+
+            // Calculate emissions
+            const electricityEmissions = electricity * ELECTRICITY_EMISSION_FACTOR;
+            const gallons = miles / milesPerGallon;
+            const liters = gallons * 3.785; // Convert gallons to liters
+            const vehicleEmissions = liters * GASOLINE_EMISSION_FACTOR;
+            const heatingEmissions = gasHeating * NATURAL_GAS_EMISSION_FACTOR;
+
+            const totalEmissions = electricityEmissions + vehicleEmissions + heatingEmissions;
+
+            // Display results
+            document.getElementById('resultText').innerHTML = `
+                <strong>CO2 Emissions from Electricity:</strong> ${electricityEmissions.toFixed(2)} kg<br>
+                <strong>CO2 Emissions from Vehicle Travel:</strong> ${vehicleEmissions.toFixed(2)} kg<br>
+                <strong>CO2 Emissions from Heating:</strong> ${heatingEmissions.toFixed(2)} kg<br>
+                <strong>Total CO2 Emissions:</strong> ${totalEmissions.toFixed(2)} kg
+            `;
+        }
+    </script>
+</body>
+</html>

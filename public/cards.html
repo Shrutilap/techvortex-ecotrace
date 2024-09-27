@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href = "cards.css" rel = "stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    
+    <title>Home</title>
+    <script>
+        async function fetchPagetips() {
+            try {
+                const response = await fetch('/tips');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+<<<<<<< HEAD
+                window.location.href = "/tips";
+                // const html = await response.text();
+                // document.body.innerHTML = html; // Replace current page content with the fetched HTML
+=======
+                const html = await response.text();
+                document.body.innerHTML = html; // Replace current page content with the fetched HTML
+>>>>>>> c23fd5f934dff3234e52b37bf83dee9a0d5f7275
+            } catch (error) {
+                console.error('Error fetching tips:', error);
+            }
+        }
+          async function fetchPagemining() {
+            try {
+                const response = await fetch('/mining');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+<<<<<<< HEAD
+                window.location.href = "./mining";
+=======
+                const html = await response.text();
+                document.body.innerHTML = html; // Replace current page content with the fetched HTML
+>>>>>>> c23fd5f934dff3234e52b37bf83dee9a0d5f7275
+            } catch (error) {
+                console.error('Error fetching tips:', error);
+            }
+        }
+          async function fetchPagefootprint() {
+            try {
+                const response = await fetch('/footprint');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+<<<<<<< HEAD
+                window.location.href = "./footprint";
+=======
+                const html = await response.text();
+                document.body.innerHTML = html; // Replace current page content with the fetched HTML
+>>>>>>> c23fd5f934dff3234e52b37bf83dee9a0d5f7275
+            } catch (error) {
+                console.error('Error fetching tips:', error);
+            }
+        }
+          async function fetchPagerewards() {
+            try {
+                const response = await fetch('/rewards');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+<<<<<<< HEAD
+                window.location.href = "./rewards";
+=======
+                const html = await response.text();
+                document.body.innerHTML = html; // Replace current page content with the fetched HTML
+>>>>>>> c23fd5f934dff3234e52b37bf83dee9a0d5f7275
+            } catch (error) {
+                console.error('Error fetching tips:', error);
+            }
+        }
+          async function fetchPageprogress() {
+            try {
+                const response = await fetch('/progress');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+<<<<<<< HEAD
+                window.location.href = "./progress";
+=======
+                const html = await response.text();
+                document.body.innerHTML = html; // Replace current page content with the fetched HTML
+>>>>>>> c23fd5f934dff3234e52b37bf83dee9a0d5f7275
+            } catch (error) {
+                console.error('Error fetching tips:', error);
+            }
+        }
+          async function fetchPagedashboard() {
+            try {
+                const response = await fetch('/dashboard');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const html = await response.text();
+                document.body.innerHTML = html; // Replace current page content with the fetched HTML
+            } catch (error) {
+                console.error('Error fetching tips:', error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+      </div> -->
+    <div class = "container">
+        <div class = "leftmost">
+            <div class = "leftmost_up"></div>
+            <div class = "leftmost_down">
+                <div></div>
+                <div class = "login">
+<<<<<<< HEAD
+                    <img src = "./assets/logo.png">
+=======
+                    <a href="#" class="login-link">Sign in to access exclusive features!</a>
+>>>>>>> c23fd5f934dff3234e52b37bf83dee9a0d5f7275
+                </div>
+            </div>
+        </div>
+        <div class = "rightgrid">
+            <div class = "upper_right">
+                <div class = "upper_right1">
+                    <div class = "dash">
+                        <div class = "dash_logo"><img  class = "dashlogo" src = "./assets/dashboard1.png", height="120px", width="120px"></div>
+                        <div><a href = "#" onclick="fetchPagedashboard()" class = "login-link">Dashboard</a></div>
+                    </div>
+                    
+                </div>
+                <div class = "upper_right2">
+                    <div class = "foot">
+<<<<<<< HEAD
+                        <img class = "Designerlogo" src = "./assets/Designer.png", height="120px", width="120px">
+=======
+                        <img class = "Designerlogo" src = "assets/Designer.png", height="120px", width="120px">
+>>>>>>> c23fd5f934dff3234e52b37bf83dee9a0d5f7275
+                    </div>
+                    <div class = "dash">
+                        <a href = "#" onclick="fetchPagefootprint()" class = "login-link">Footprint</a>
+                    </div>
+                </div>
+                <div class = "upper_right3">
+                    <div class = "win">
+                        <div class = "winlogo">
+                            <img class = "winlogo" src = "./assets/star.png", height="120px", width="120px">
+                        </div>
+                        <div class = "wintext">
+                            <a href = "#" onclick="fetchPagerewards()" class = "login-link">Win exciting <br> <span>offers!</span></a>
+                        </div>
+                        
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class = "lower_right">
+                <div class = "lower_right1">
+                    <div class = "mine">
+                        <div class = "mine_logo"><img class = "minelogo" src = "./assets/mining1.png", height="120px", width="120px"></div>
+                        <div class = "mine_text"><a href = "#" onclick="fetchPagemining()" class = "login-link">Mining</a></div>
+                    </div>
+                </div>
+                <div class = "lower_right2">
+                    <div class = "progress">
+                        <div class = "prog_logo"><img class = "dashlogo" src = "/assets/bar.png", height="120px", width="120px"></div>
+                        <div class = "proglink"><a href = "#" onclick="fetchPageprogress()" class = "login-link">Progress</a></div>
+                        
+                    </div>
+                </div>
+                <div class = "lower_right3">
+                    <div class="tips">
+                        <div class = "tip_logo"><img class = "tiplogo" src = "./assets/idea.png", height="120px", width="120px"></div>
+                        <div class = "tiplink"><a href="#" onclick="fetchPagetips()" class = "login-link">Tips</a></div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<<<<<<< HEAD
+</html>
+=======
+</html>
+>>>>>>> c23fd5f934dff3234e52b37bf83dee9a0d5f7275

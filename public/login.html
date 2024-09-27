@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account</title>
+    <link rel="stylesheet" href="login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Left side with image and text -->
+        <div class="left-side">
+            <div class="overlay">
+                <a href="#" class="back-link">Back to website →</a>
+                <h1>Capturing Moments, Creating Memories</h1>
+            </div>
+            <img src="./footprint-comprised-of-greenery-and-shrubs.webp" alt="Background Image" class="bg-image">
+        </div>
+
+        <!-- Right side with form -->
+        <div class="right-side">
+            <div class="form-container">    
+                <h2>Create an account</h2>
+                <p>Already have an account? <a href="./login">Log in</a></p>
+                <form id="registerForm" onsubmit="return validateForm()">
+                    <div class="name-row">
+                        <input type="text" id="firstName" placeholder="First name">
+                        <input type="text" id="lastName" placeholder="Last name">
+                    </div>
+                    <input type="email" id="email" placeholder="Email" class="full-width">
+                    <input type="password" id="password" placeholder="Enter your password" class="full-width">
+                    
+                    <!-- <div class="checkbox">
+                        <input type="checkbox" id="terms">
+                        <label for="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+                    </div> -->
+
+                    <button type="submit" class="create-btn">Create account</button>
+                
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

@@ -170,6 +170,7 @@ app.post('/login', async (req, res) => {
     res.status(200).json({
         message: 'Login successful',
         redirectUrl: '/home'
+    });
 
 
     // try {

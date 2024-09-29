@@ -2,3 +2,4 @@ node
 express
 chart.js
 streamlit
+pg

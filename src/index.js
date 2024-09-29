@@ -98,6 +98,12 @@ const pool = new Pool({
   }
 });
 
+pool.connect((err) => {
+  if (err) {
+    return console.error('Error connecting to the database', err.stack);
+  }
+  console.log('Connected to PostgreSQL database!');
+});
 // POST endpoint for user registration
 app.post('/register', async (req, res) => {
     const { first_name, last_name, email, password } = req.body;

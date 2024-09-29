@@ -1,10 +1,15 @@
 require('dotenv').config(); // Load environment variables from .env file
-
 const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+// const { Client } = require('users');
+
+// const client = new Client({
+//   connectionString: process.env.DATABASE_URL,
+// });
+
 
 const app = express();
 const PORT = process.env.PORT || 10000;
@@ -136,29 +141,56 @@ app.post('/register', async (req, res) => {
     }
 });
 
+
+//hardcoded
+const users = [
+    { email: 'shrutilap01@gmail.com', password: 'ujbk' }
+];
+
 // Login route for actual login page
 app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    
 
-    try {
-        // Query the database for a user with the provided email
-        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    //hardcoded
+     const { email, password } = req.body;
 
-        if (result.rows.length === 0) {
-            return res.status(400).json({ message: 'User not found' });
-        }
+    // Find the user
+    const user = users.find(user => user.email === email);
 
-        const user = result.rows[0];
+    if (!user) {
+        return res.status(400).json({ message: 'User not found' });
+    }
 
-        // Check if the password matches (plain-text password for now)
-        if (user.password !== password) {
-            return res.status(401).json({ message: 'Incorrect password' });
-        }
+    // Check if the password matches
+    if (user.password !== password) {
+        return res.status(401).json({ message: 'Incorrect password' });
+    }
 
-        // If email and password match, redirect to the home page
-        res.status(200).json({
-            message: 'Login successful',
-            redirectUrl: '/home'
+    // If username and password match
+    res.status(200).json({
+        message: 'Login successful',
+        redirectUrl: '/home'
+
+
+    // try {
+    //     // Query the database for a user with the provided email
+    //     const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+
+    //     if (result.rows.length === 0) {
+    //         return res.status(400).json({ message: 'User not found' });
+    //     }
+
+    //     const user = result.rows[0];
+
+    //     // Check if the password matches (plain-text password for now)
+    //     if (user.password !== password) {
+    //         return res.status(401).json({ message: 'Incorrect password' });
+    //     }
+
+    //     // If email and password match, redirect to the home page
+    //     res.status(200).json({
+    //         message: 'Login successful',
+    //         redirectUrl: '/home'
         });
     } catch (error) {
         console.error('Error during login:', error);

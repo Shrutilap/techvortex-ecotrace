@@ -92,11 +92,10 @@ console.log('Database Connection Details:', {
 
 // PostgreSQL connection
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: String(process.env.DB_PASSWORD), // Ensure password is a string
-    port: process.env.DB_PORT,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false // Required for SSL on Render
+  }
 });
 
 // POST endpoint for user registration

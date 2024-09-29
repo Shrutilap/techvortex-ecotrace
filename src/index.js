@@ -98,11 +98,17 @@ const pool = new Pool({
   }
 });
 
-pool.connect((err) => {
+pool.connect((err, client, release) => {
   if (err) {
-    return console.error('Error connecting to the database', err.stack);
+    return console.error('Error acquiring client', err.stack);
   }
-  console.log('Connected to PostgreSQL database!');
+  client.query('SELECT NOW()', (err, result) => {
+    release();
+    if (err) {
+      return console.error('Error executing query', err.stack);
+    }
+    console.log('Database connected at:', result.rows);
+  });
 });
 // POST endpoint for user registration
 app.post('/register', async (req, res) => {
